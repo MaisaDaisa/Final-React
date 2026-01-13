@@ -8,11 +8,21 @@
     --color-secondary: #7c8485;
     --color-red: #fe5250;
     --color-text: #071636;
+
+    --color-background-dark: #1f2937;
+    --color-primary-dark: #111827;
+    --color-secondary-dark: #d1d5db;
+    --color-red-dark: #f87171;
+    --color-text-dark: #f9fafb;
 }
 
-body {
+html {
     font-family: 'Poppins', sans-serif;
     background-color: var(--color-background);
     color: var(--color-secondary);
-    height: 100dvh;
+}
+
+html.dark {
+    background-color: var(--color-background-dark);
+    color: var(--color-secondary-dark);
 }

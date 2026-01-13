@@ -2,7 +2,7 @@ import { api } from '@/config';
 import type { Pokemon } from 'pokenode-ts';
 import { useEffect, useState } from 'react';
 
-const useHome = () => {
+const useFetchPokemon = () => {
     const [pokemons, setPokemons] = useState<Pokemon[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -34,4 +34,4 @@ const useHome = () => {
     return { pokemons, loading };
 };
 
-export default useHome;
+export default useFetchPokemon;
