@@ -1,3 +1,5 @@
+import { DisplayPokemon } from '@/components';
+import { api } from '@/config';
 import { useDialog } from '@/context';
 import { getTypeColor } from '@/helper';
 import type { Pokemon } from 'pokenode-ts';
@@ -5,44 +7,67 @@ import type { Pokemon } from 'pokenode-ts';
 type Props = Pokemon;
 
 const Card: React.FC<Props> = ({ id, name, sprites, types }) => {
-    const imageUrl = sprites?.front_default ?? '';
-    const { openDialog } = useDialog();
+    const imageUrl =
+        sprites?.other?.['official-artwork']?.front_default ??
+        sprites?.other?.dream_world?.front_default ??
+        sprites?.front_default ??
+        '';
 
-    const handleClick = () => {
-        openDialog('Hello', <div>Hello</div>);
+    const { openDialog } = useDialog();
+    const primaryType = types[0]?.type.name ?? 'normal';
+
+    const handleClick = async () => {
+        try {
+            const data = await api.getPokemonById(id);
+            if (data) {
+                openDialog({ content: <DisplayPokemon {...data} /> });
+            }
+        } catch (error) {
+            console.error('Failed to fetch Pokémon details:', error);
+        }
     };
 
     return (
         <div
             onClick={handleClick}
-            className="mt-15 flex transform cursor-pointer flex-col items-center rounded-2xl border-4 border-yellow-400 bg-white p-4 text-center shadow-lg transition-transform hover:scale-105 dark:bg-gray-800"
+            className="group flex cursor-pointer flex-col overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-md transition-all duration-300 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800"
         >
-            <div className="relative h-30 w-60">
+            <div
+                className={`flex flex-col items-center justify-center p-6 transition-colors ${getTypeColor(primaryType)} bg-opacity-10 dark:bg-opacity-20`}
+            >
+                <div className="mb-4 flex w-full items-center justify-between">
+                    <span className="text-sm font-black tracking-tighter opacity-50 dark:text-white">
+                        #{id.toString().padStart(3, '0')}
+                    </span>
+                    <div className="h-2 w-2 animate-pulse rounded-full bg-white shadow-[0_0_8px_white]" />
+                </div>
+
                 <img
                     src={imageUrl}
                     alt={name}
-                    className="absolute -top-25 mb-2 size-60 object-contain"
+                    className="h-40 w-40 object-contain drop-shadow-2xl transition-transform duration-500 group-hover:scale-110"
                 />
             </div>
 
-            <p className="text-sm font-bold text-gray-600 dark:text-gray-300">
-                #{id}
-            </p>
-            <h3 className="text-xl font-extrabold text-gray-900 capitalize dark:text-white">
-                {name}
-            </h3>
+            <div className="flex flex-col items-center p-6 pt-4">
+                <h3 className="text-2xl font-black tracking-tight text-gray-800 capitalize dark:text-white">
+                    {name}
+                </h3>
 
-            <div className="mt-2 flex gap-2">
-                {types?.map((t) => (
-                    <span
-                        key={t.type.name}
-                        className={`rounded-full px-2 py-1 text-xs font-semibold capitalize ${getTypeColor(
-                            t.type.name,
-                        )}`}
-                    >
-                        {t.type.name}
-                    </span>
-                ))}
+                <div className="mt-4 flex gap-2">
+                    {types?.map((t) => (
+                        <span
+                            key={t.type.name}
+                            className={`rounded-full px-4 py-1 text-xs font-bold tracking-wider text-white uppercase shadow-sm ${getTypeColor(
+                                t.type.name,
+                            )}`}
+                        >
+                            {t.type.name}
+                        </span>
+                    ))}
+                </div>
+
+                <div className="mt-6 h-1 w-12 rounded-full bg-gray-200 transition-all group-hover:w-24 group-hover:bg-blue-400 dark:bg-gray-700" />
             </div>
         </div>
     );

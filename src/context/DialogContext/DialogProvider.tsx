@@ -1,6 +1,10 @@
 import { useState, type ReactNode } from 'react';
 import Dialog from './Dialog';
-import { DialogContext, type DialogState } from './DialogContext';
+import {
+    DialogContext,
+    type DialogState,
+    type openDialogType,
+} from './DialogContext';
 
 export type Props = {
     children: ReactNode;
@@ -9,14 +13,8 @@ export type Props = {
 export function DialogProvider({ children }: Props) {
     const [state, setState] = useState<DialogState>({ open: false });
 
-    const openDialog = (
-        content: ReactNode,
-        wrapperProps?: React.DetailedHTMLProps<
-            React.HTMLAttributes<HTMLDivElement>,
-            HTMLDivElement
-        >,
-    ) => {
-        setState({ open: true, content, wrapperProps });
+    const openDialog: openDialogType = (props) => {
+        setState({ open: true, ...props });
     };
 
     const closeDialog = () => {

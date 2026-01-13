@@ -9,15 +9,11 @@ export type DialogState = {
     >;
 };
 
+export type openDialogType = (dialog: Omit<DialogState, 'open'>) => void;
+
 export type DialogContextType = {
     state: DialogState;
-    openDialog: (
-        content: React.ReactNode,
-        wrapperProps?: React.DetailedHTMLProps<
-            React.HTMLAttributes<HTMLDivElement>,
-            HTMLDivElement
-        >,
-    ) => void;
+    openDialog: openDialogType;
     closeDialog: () => void;
 };
 

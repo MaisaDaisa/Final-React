@@ -53,7 +53,7 @@ export default function Dialog({
     return (
         <dialog
             ref={ref}
-            className={`mx-auto my-auto w-[90%] max-w-md bg-transparent shadow-lg outline-0 backdrop-blur-sm backdrop:bg-black backdrop:opacity-80`}
+            className={`mx-auto my-auto bg-transparent shadow-lg outline-0 backdrop-blur-sm backdrop:bg-black backdrop:opacity-80`}
             onCancel={onClose}
         >
             <div
