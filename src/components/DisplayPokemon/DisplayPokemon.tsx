@@ -1,13 +1,8 @@
 import { getTypeColor } from '@/helper';
-import type { Pokemon } from 'pokenode-ts';
 import React from 'react';
-import { Button } from './common';
+import type { Props } from './types';
 
-type Props = Pokemon & {
-    onChoose?: (pokemon: Pokemon) => void;
-};
-
-export const DisplayPokemon: React.FC<Props> = (data) => {
+const DisplayPokemon: React.FC<Props> = ({ bottomSection, ...data }) => {
     const primaryColor = getTypeColor(data.types[0]?.type.name ?? 'normal');
 
     return (
@@ -139,14 +134,10 @@ export const DisplayPokemon: React.FC<Props> = (data) => {
                     </section>
                 </div>
 
-                <Button
-                    variant="none"
-                    onClick={() => data.onChoose?.(data)}
-                    className={`text-sm uppercase hover:brightness-110 ${primaryColor}`}
-                >
-                    Choose Pokemon
-                </Button>
+                {bottomSection(primaryColor)}
             </div>
         </div>
     );
 };
+
+export default DisplayPokemon;

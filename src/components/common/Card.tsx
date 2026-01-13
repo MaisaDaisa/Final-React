@@ -1,13 +1,14 @@
-import { DisplayPokemon } from '@/components';
+import { Button } from '@/components';
 import { api } from '@/config';
 import { useDialog, useTeams, useToast } from '@/context';
 import { getTypeColor } from '@/helper';
 import type { Pokemon } from 'pokenode-ts';
+import { DisplayPokemon } from '../DisplayPokemon';
 
 type Props = Pokemon;
 
 const Card: React.FC<Props> = ({ id, name, sprites, types }) => {
-    const { addPokemonToTeam } = useTeams();
+    const { addPokemonToTeam, isTeamFull } = useTeams();
     const { addToast } = useToast();
     const { closeDialog } = useDialog();
 
@@ -28,14 +29,29 @@ const Card: React.FC<Props> = ({ id, name, sprites, types }) => {
                     content: (
                         <DisplayPokemon
                             {...data}
-                            onChoose={(pokemon) => {
-                                addPokemonToTeam(pokemon.id);
-                                addToast({
-                                    type: 'success',
-                                    message: `${name} added to your team`,
-                                });
-                                closeDialog();
-                            }}
+                            bottomSection={(primaryColor) => (
+                                <Button
+                                    variant="none"
+                                    onClick={() => {
+                                        if (!isTeamFull()) {
+                                            addPokemonToTeam(data.id);
+                                            addToast({
+                                                type: 'success',
+                                                message: `${name} added to your team`,
+                                            });
+                                        } else {
+                                            addToast({
+                                                type: 'error',
+                                                message: `Your team is full, please remove pokemons before proceeding`,
+                                            });
+                                        }
+                                        closeDialog();
+                                    }}
+                                    className={`text-sm uppercase hover:brightness-110 ${primaryColor}`}
+                                >
+                                    Choose Pokemon
+                                </Button>
+                            )}
                         />
                     ),
                     wrapperProps: { className: 'rounded-[3rem]!' },
