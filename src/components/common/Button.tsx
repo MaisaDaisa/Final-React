@@ -1,5 +1,5 @@
+import { cn } from '@/helper';
 import React, { type ButtonHTMLAttributes } from 'react';
-import { cn } from '../../helper';
 
 type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'none';
 

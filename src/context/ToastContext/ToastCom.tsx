@@ -52,7 +52,6 @@ const ToastCom: React.FC<Toast & { onClose: VoidFunction }> = ({
             <button
                 onClick={onClose}
                 className="-mr-1 shrink-0 rounded-md p-1 opacity-40 transition-all hover:bg-black/5 hover:opacity-100"
-                aria-label="Close"
             >
                 <X className="h-4 w-4" />
             </button>
