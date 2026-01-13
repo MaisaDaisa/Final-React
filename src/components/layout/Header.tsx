@@ -5,7 +5,7 @@ const Header = () => {
     const { theme, toggleTheme } = useTheme();
     return (
         <header className="w-full border-b-4 border-blue-600 bg-yellow-400 dark:border-yellow-400 dark:bg-gray-900">
-            <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+            <div className="mx-auto grid max-w-7xl grid-cols-3 items-center justify-between px-6 py-4">
                 <div className="flex items-center gap-3">
                     <div className="flex h-10 w-10 items-center justify-center rounded-full border-4 border-black bg-white">
                         <div className="h-3 w-3 rounded-full bg-black" />
@@ -30,19 +30,21 @@ const Header = () => {
                     </a>
                 </nav>
 
-                <button
-                    onClick={toggleTheme}
-                    className="cursor-pointer rounded-full border-2 border-black bg-white p-2 transition hover:scale-110 dark:border-yellow-400 dark:bg-gray-800"
-                >
-                    {theme === 'system' ? (
-                        <MonitorCog className="size-5 text-yellow-400" />
-                    ) : (
-                        <>
-                            <Moon className="size-5 text-gray-800 dark:hidden dark:text-yellow-400" />
-                            <Sun className="size-5 text-gray-800 not-dark:hidden dark:text-yellow-400" />
-                        </>
-                    )}
-                </button>
+                <div className="flex justify-end">
+                    <button
+                        onClick={toggleTheme}
+                        className="cursor-pointer rounded-full border-2 border-black bg-white p-2 transition hover:scale-110 dark:border-yellow-400 dark:bg-gray-800"
+                    >
+                        {theme === 'system' ? (
+                            <MonitorCog className="size-5 text-yellow-400" />
+                        ) : (
+                            <>
+                                <Moon className="size-5 text-gray-800 dark:hidden dark:text-yellow-400" />
+                                <Sun className="size-5 text-gray-800 not-dark:hidden dark:text-yellow-400" />
+                            </>
+                        )}
+                    </button>
+                </div>
             </div>
         </header>
     );
