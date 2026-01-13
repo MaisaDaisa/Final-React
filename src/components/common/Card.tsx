@@ -1,19 +1,39 @@
-type Props = {
-    id: string;
-    name: string;
-    pokeElement: string[];
-};
+import type { Pokemon } from 'pokenode-ts';
+import { getTypeColor } from '../../helper';
 
-const Card: React.FC<Props> = ({ id, name, pokeElement }) => {
+type Props = Pokemon;
+
+const Card: React.FC<Props> = ({ id, name, sprites, types }) => {
+    const imageUrl = sprites?.front_default ?? '';
+
     return (
-        <div className="border-primary rounded-2xl border p-4 shadow-md">
-            <img src="" alt="" className="-top-20 size-32" />
-            <div className="flex flex-col gap-1">
-                <p className="font-bold">№ ${id}</p>
-                <h3 className="text-text text-2xl font-extrabold">${name}</h3>
-                <div className="pokelement flex items-center justify-center gap-2">
-                    {pokeElement.map((el) => el)}
-                </div>
+        <div className="mt-15 flex transform flex-col items-center rounded-2xl border-4 border-yellow-400 bg-white p-4 text-center shadow-lg transition-transform hover:scale-105 dark:bg-gray-800">
+            <div className="relative h-30 w-60">
+                <img
+                    src={imageUrl}
+                    alt={name}
+                    className="absolute -top-25 mb-2 size-60 object-contain"
+                />
+            </div>
+
+            <p className="text-sm font-bold text-gray-600 dark:text-gray-300">
+                #{id}
+            </p>
+            <h3 className="text-xl font-extrabold text-gray-900 capitalize dark:text-white">
+                {name}
+            </h3>
+
+            <div className="mt-2 flex gap-2">
+                {types?.map((t) => (
+                    <span
+                        key={t.type.name}
+                        className={`rounded-full px-2 py-1 text-xs font-semibold capitalize ${getTypeColor(
+                            t.type.name,
+                        )}`}
+                    >
+                        {t.type.name}
+                    </span>
+                ))}
             </div>
         </div>
     );

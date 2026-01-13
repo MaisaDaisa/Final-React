@@ -3,23 +3,35 @@ import type { Pokemon } from 'pokenode-ts';
 import { useEffect, useState } from 'react';
 
 const useHome = () => {
-    const [pokemons, setPokemons] = useState<Pokemon>();
+    const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const getStuff = async () => {
-            const pokemon = await api
-                .getPokemonByName('luxray') // Make the request
-                .catch(() => console.log('Oops!'));
+        const fetchPokemons = async () => {
+            try {
+                const data = await api.listPokemons();
 
-            if (pokemon) {
-                setPokemons(pokemon);
+                if (data?.results) {
+                    const detailedPokemons = await Promise.all(
+                        data.results.map(async (result) => {
+                            const res = await fetch(result.url);
+                            return res.json() as Promise<Pokemon>;
+                        }),
+                    );
+
+                    setPokemons(detailedPokemons);
+                }
+            } catch (err) {
+                console.error('Failed to fetch pokemons:', err);
+            } finally {
+                setLoading(false);
             }
         };
 
-        getStuff();
+        fetchPokemons();
     }, []);
 
-    return { pokemons };
+    return { pokemons, loading };
 };
 
 export default useHome;
