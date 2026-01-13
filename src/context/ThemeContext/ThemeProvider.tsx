@@ -1,28 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useLocalStorage } from '@/hooks';
+import { useEffect, type PropsWithChildren } from 'react';
 import { ThemeContext } from './ThemeContext';
 import type { Theme } from './types';
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-    const [theme, setThemeState] = useState<Theme>(() => {
-        return (localStorage.getItem('theme') as Theme) || 'system';
-    });
+const ThemeProvider = ({ children }: PropsWithChildren) => {
+    const [theme, setTheme] = useLocalStorage<Theme>('theme', 'system');
 
-    const setTheme = (newTheme: Theme) => {
-        const root = window.document.documentElement;
+    useEffect(() => {
+        const root = document.documentElement;
 
-        if (newTheme === 'system') {
-            localStorage.removeItem('theme');
-            const isSystemDark = window.matchMedia(
+        if (theme === 'system') {
+            const isDark = window.matchMedia(
                 '(prefers-color-scheme: dark)',
             ).matches;
-            root.classList.toggle('dark', isSystemDark);
-        } else {
-            localStorage.setItem('theme', newTheme);
-            root.classList.toggle('dark', newTheme === 'dark');
+
+            root.classList.toggle('dark', isDark);
+            return;
         }
 
-        setThemeState(newTheme);
-    };
+        root.classList.toggle('dark', theme === 'dark');
+    }, [theme]);
 
     useEffect(() => {
         if (theme !== 'system') return;
@@ -39,9 +36,19 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         return () => mediaQuery.removeEventListener('change', handleChange);
     }, [theme]);
 
+    const toggleTheme = () => {
+        setTheme((prev: Theme) => {
+            if (prev === 'light') return 'dark';
+            if (prev === 'dark') return 'system';
+            return 'light';
+        });
+    };
+
     return (
-        <ThemeContext.Provider value={{ theme, setTheme }}>
+        <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
             {children}
         </ThemeContext.Provider>
     );
-}
+};
+
+export default ThemeProvider;
