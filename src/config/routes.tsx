@@ -1,4 +1,4 @@
-import { Home, PokemonsDisplay } from '../pages';
+import { Home, PokemonsDisplay, Teams } from '../pages';
 
 export const routes = {
     HOME: {
@@ -9,6 +9,11 @@ export const routes = {
     POKEMONS: {
         url: '/pokemons',
         component: PokemonsDisplay,
-        title: 'Pokemon',
+        title: 'Pokemons',
+    },
+    TEAMS: {
+        url: '/teams',
+        component: Teams,
+        title: 'Teams',
     },
 };

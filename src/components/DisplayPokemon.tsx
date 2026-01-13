@@ -142,7 +142,7 @@ export const DisplayPokemon: React.FC<Props> = (data) => {
                     onClick={() => data.onChoose?.(data)}
                     className={`mt-auto w-full rounded-xl py-4 text-sm font-black tracking-widest text-white uppercase shadow-lg transition-all hover:brightness-110 active:scale-[0.98] ${primaryColor}`}
                 >
-                    Choose Pokémon
+                    Choose Pokemon
                 </button>
             </div>
         </div>

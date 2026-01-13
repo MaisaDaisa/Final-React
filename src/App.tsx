@@ -10,14 +10,12 @@ function App() {
                 <DialogProvider>
                     <Layout>
                         <Routes>
-                            <Route
-                                element={<routes.HOME.component />}
-                                path={routes.HOME.url}
-                            />
-                            <Route
-                                element={<routes.POKEMONS.component />}
-                                path={routes.POKEMONS.url}
-                            />
+                            {Object.values(routes).map((route) => (
+                                <Route
+                                    element={<route.component />}
+                                    path={route.url}
+                                />
+                            ))}
                         </Routes>
                     </Layout>
                 </DialogProvider>
