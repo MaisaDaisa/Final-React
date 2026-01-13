@@ -1,4 +1,5 @@
 import { useState, type PropsWithChildren } from 'react';
+import ToastCom from './ToastCom';
 import { ToastContext } from './toastContext';
 import type { Toast } from './types';
 
@@ -22,18 +23,7 @@ export const ToastProvider: React.FC<PropsWithChildren> = ({ children }) => {
             {children}
             <div className="fixed right-4 bottom-4 z-50 flex flex-col gap-2">
                 {toasts.map((t) => (
-                    <div
-                        key={t.id}
-                        className={`rounded px-4 py-2 text-white shadow-lg ${
-                            t.type === 'success'
-                                ? 'bg-green-500'
-                                : t.type === 'error'
-                                  ? 'bg-red-500'
-                                  : 'bg-blue-500'
-                        }`}
-                    >
-                        {t.message}
-                    </div>
+                    <ToastCom {...t} />
                 ))}
             </div>
         </ToastContext.Provider>
