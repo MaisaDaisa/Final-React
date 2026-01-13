@@ -24,7 +24,7 @@ export function DialogProvider({ children }: Props) {
     return (
         <DialogContext.Provider value={{ state, openDialog, closeDialog }}>
             {children}
-            <Dialog open={state.open} onClose={closeDialog}>
+            <Dialog {...state} onClose={closeDialog}>
                 {state.content}
             </Dialog>
         </DialogContext.Provider>

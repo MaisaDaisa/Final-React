@@ -2,7 +2,11 @@ import { getTypeColor } from '@/helper';
 import type { Pokemon } from 'pokenode-ts';
 import React from 'react';
 
-export const DisplayPokemon: React.FC<Pokemon> = (data) => {
+type Props = Pokemon & {
+    onChoose?: (pokemon: Pokemon) => void;
+};
+
+export const DisplayPokemon: React.FC<Props> = (data) => {
     const primaryColor = getTypeColor(data.types[0]?.type.name ?? 'normal');
 
     return (
@@ -119,9 +123,9 @@ export const DisplayPokemon: React.FC<Pokemon> = (data) => {
                         <h3 className="mb-2 text-sm font-black tracking-widest text-gray-500 uppercase dark:text-gray-400">
                             Moves
                         </h3>
-                        <div className="scrollbar-hide max-h-32 overflow-y-auto pr-2">
+                        <div className="scrollbar-hide max-h-32 overflow-y-auto pr-2 outline-0">
                             <div className="flex flex-wrap gap-1">
-                                {data.moves.slice(0, 20).map((m) => (
+                                {data.moves.slice(0, 12).map((m) => (
                                     <span
                                         key={m.move.name}
                                         className="rounded-md bg-gray-100 px-2 py-1 text-[10px] font-bold text-gray-500 uppercase dark:bg-gray-800 dark:text-gray-400"
@@ -133,6 +137,13 @@ export const DisplayPokemon: React.FC<Pokemon> = (data) => {
                         </div>
                     </section>
                 </div>
+
+                <button
+                    onClick={() => data.onChoose?.(data)}
+                    className={`mt-auto w-full rounded-xl py-4 text-sm font-black tracking-widest text-white uppercase shadow-lg transition-all hover:brightness-110 active:scale-[0.98] ${primaryColor}`}
+                >
+                    Choose Pokémon
+                </button>
             </div>
         </div>
     );

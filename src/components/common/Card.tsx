@@ -20,7 +20,10 @@ const Card: React.FC<Props> = ({ id, name, sprites, types }) => {
         try {
             const data = await api.getPokemonById(id);
             if (data) {
-                openDialog({ content: <DisplayPokemon {...data} /> });
+                openDialog({
+                    content: <DisplayPokemon {...data} />,
+                    wrapperProps: { className: 'rounded-[3rem]!' },
+                });
             }
         } catch (error) {
             console.error('Failed to fetch Pokémon details:', error);

@@ -1,3 +1,4 @@
+import { cn } from '@/helper';
 import { useEffect, useRef } from 'react';
 
 type DialogProps = {
@@ -58,7 +59,10 @@ export default function Dialog({
         >
             <div
                 {...wrapperProps}
-                className={`dark:bg-background-dark rounded-2xl border-2 bg-white p-6 text-black dark:border-yellow-300 dark:text-white ${wrapperProps?.className ?? ''}`}
+                className={cn(
+                    `dark:bg-background-dark rounded-2xl border-2 bg-white p-6 text-black dark:border-yellow-300 dark:text-white`,
+                    wrapperProps?.className,
+                )}
             >
                 <div>{children}</div>
             </div>
