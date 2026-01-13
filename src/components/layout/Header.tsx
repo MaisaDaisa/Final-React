@@ -1,8 +1,8 @@
-import { Moon, Sun } from 'lucide-react';
+import { MonitorCog, Moon, Sun } from 'lucide-react';
 import { useTheme } from '../../context';
 
 const Header = () => {
-    const { theme, setTheme } = useTheme();
+    const { theme, toggleTheme } = useTheme();
     return (
         <header className="w-full border-b-4 border-blue-600 bg-yellow-400 dark:border-yellow-400 dark:bg-gray-900">
             <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
@@ -11,7 +11,7 @@ const Header = () => {
                         <div className="h-3 w-3 rounded-full bg-black" />
                     </div>
                     <h1 className="text-2xl font-extrabold tracking-wide text-blue-900 dark:text-yellow-300">
-                        PokéDex
+                        PokeDex
                     </h1>
                 </div>
 
@@ -31,13 +31,16 @@ const Header = () => {
                 </nav>
 
                 <button
-                    onClick={toggleDarkMode}
-                    className="rounded-full border-2 border-black bg-white p-2 transition hover:scale-110 dark:border-yellow-400 dark:bg-gray-800"
+                    onClick={toggleTheme}
+                    className="cursor-pointer rounded-full border-2 border-black bg-white p-2 transition hover:scale-110 dark:border-yellow-400 dark:bg-gray-800"
                 >
-                    {theme === 'dark' ? (
-                        <Sun className="h-5 w-5 text-yellow-400" />
+                    {theme === 'system' ? (
+                        <MonitorCog className="size-5 text-yellow-400" />
                     ) : (
-                        <Moon className="h-5 w-5 text-gray-800" />
+                        <>
+                            <Moon className="size-5 text-gray-800 dark:hidden dark:text-yellow-400" />
+                            <Sun className="size-5 text-gray-800 not-dark:hidden dark:text-yellow-400" />
+                        </>
                     )}
                 </button>
             </div>
