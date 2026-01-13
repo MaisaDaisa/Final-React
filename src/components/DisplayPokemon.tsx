@@ -1,6 +1,7 @@
 import { getTypeColor } from '@/helper';
 import type { Pokemon } from 'pokenode-ts';
 import React from 'react';
+import { Button } from './common';
 
 type Props = Pokemon & {
     onChoose?: (pokemon: Pokemon) => void;
@@ -138,12 +139,13 @@ export const DisplayPokemon: React.FC<Props> = (data) => {
                     </section>
                 </div>
 
-                <button
+                <Button
+                    variant="none"
                     onClick={() => data.onChoose?.(data)}
-                    className={`mt-auto w-full rounded-xl py-4 text-sm font-black tracking-widest text-white uppercase shadow-lg transition-all hover:brightness-110 active:scale-[0.98] ${primaryColor}`}
+                    className={`text-sm uppercase hover:brightness-110 ${primaryColor}`}
                 >
                     Choose Pokemon
-                </button>
+                </Button>
             </div>
         </div>
     );

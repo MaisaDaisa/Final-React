@@ -1,4 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router';
+import { routes } from '../../config';
+import PokeShow from './components/PokeShow';
+import TeamRowActions from './components/TeamRowActions';
 import useFetchTeamData from './useFetchTeamData';
 
 type TeamRowProps = {
@@ -20,61 +24,59 @@ const TeamRow: React.FC<TeamRowProps> = ({
 
     return (
         <div
-            className={`rounded-3xl p-6 transition-all ${isActive ? 'bg-blue-50 ring-2 ring-blue-500 dark:bg-gray-800' : 'bg-white shadow-sm dark:bg-gray-900'}`}
+            className={`group relative rounded-3xl p-1 transition-all duration-300 ${
+                isActive
+                    ? 'bg-blue-500 shadow-xl shadow-blue-500/20 dark:bg-yellow-500 dark:shadow-yellow-500/20'
+                    : 'bg-gray-200 dark:bg-gray-700'
+            }`}
         >
-            <div className="mb-6 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                    <h3 className="text-2xl font-black tracking-tight uppercase dark:text-white">
-                        {name}
-                    </h3>
-                    <span className="rounded-full bg-gray-200 px-3 py-1 text-xs font-bold text-gray-600 dark:bg-gray-700 dark:text-gray-400">
-                        {ids.length}/6
-                    </span>
-                </div>
-                <div className="flex gap-2">
-                    {!isActive && (
-                        <button
-                            onClick={() => onSelect(name)}
-                            className="text-sm font-bold text-blue-600 hover:underline"
-                        >
-                            Set Active
-                        </button>
-                    )}
-                    <button
-                        onClick={() => onDelete(name)}
-                        className="text-sm font-bold text-red-500 hover:underline"
-                    >
-                        Delete
-                    </button>
-                </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6">
-                {loading ? (
-                    <div className="col-span-full flex h-24 animate-pulse items-center justify-center text-gray-400">
-                        Loading team members...
-                    </div>
-                ) : ids.length === 0 ? (
-                    <div className="col-span-full rounded-2xl border-2 border-dashed border-gray-100 py-8 text-center text-sm text-gray-400 italic">
-                        No Pokemon in this team yet.
-                    </div>
-                ) : (
-                    members.map((poke) => (
-                        <div
-                            key={poke.id}
-                            className="flex flex-col items-center rounded-xl bg-gray-50 p-2 dark:bg-gray-800"
-                        >
-                            <img
-                                src={poke.sprites.front_default ?? ''}
-                                alt={poke.name}
-                                className="h-16 w-16 object-contain"
-                            />
-                            <p className="text-[10px] font-bold tracking-tighter text-gray-500 uppercase">
-                                {poke.name}
-                            </p>
+            <div className="rounded-[22px] bg-white p-6 dark:bg-gray-900">
+                <div className="mb-6 flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                        <div className="flex flex-col">
+                            <h3 className="text-2xl font-black tracking-tight text-gray-800 uppercase dark:text-white">
+                                {name}
+                            </h3>
+                            <div className="flex items-center gap-2">
+                                <div
+                                    className={`h-1.5 w-1.5 rounded-full ${isActive ? 'animate-pulse bg-blue-500' : 'bg-gray-300'}`}
+                                />
+                                <span className="text-[10px] font-bold tracking-widest text-gray-400 uppercase">
+                                    {isActive ? 'Active Squad' : 'Reserve Team'}
+                                </span>
+                            </div>
                         </div>
-                    ))
-                )}
+                    </div>
+
+                    <TeamRowActions
+                        isActive={isActive}
+                        length={ids.length}
+                        onDelete={() => onDelete(name)}
+                        onSelect={() => onSelect(name)}
+                    />
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-6">
+                    {loading ? (
+                        Array.from({ length: ids.length || 1 }).map((_, i) => (
+                            <div
+                                key={i}
+                                className="h-24 animate-pulse rounded-2xl bg-gray-100 dark:bg-gray-800"
+                            />
+                        ))
+                    ) : ids.length === 0 ? (
+                        <Link
+                            to={routes.POKEMONS.url}
+                            className="group/empty col-span-full flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-100 py-10 transition-colors hover:border-blue-200 dark:border-gray-800"
+                        >
+                            <span className="text-sm font-bold text-gray-400 group-hover/empty:text-blue-500 dark:group-hover/empty:text-yellow-500">
+                                Empty Slot - Add Pokemon
+                            </span>
+                        </Link>
+                    ) : (
+                        members.map((poke) => <PokeShow {...poke} />)
+                    )}
+                </div>
             </div>
         </div>
     );

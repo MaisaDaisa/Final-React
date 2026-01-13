@@ -1,12 +1,13 @@
 import { DisplayPokemon } from '@/components';
 import { api } from '@/config';
-import { useDialog } from '@/context';
+import { useDialog, useTeams } from '@/context';
 import { getTypeColor } from '@/helper';
 import type { Pokemon } from 'pokenode-ts';
 
 type Props = Pokemon;
 
 const Card: React.FC<Props> = ({ id, name, sprites, types }) => {
+    const { addPokemonToTeam } = useTeams();
     const imageUrl =
         sprites?.other?.['official-artwork']?.front_default ??
         sprites?.other?.dream_world?.front_default ??
@@ -21,7 +22,14 @@ const Card: React.FC<Props> = ({ id, name, sprites, types }) => {
             const data = await api.getPokemonById(id);
             if (data) {
                 openDialog({
-                    content: <DisplayPokemon {...data} />,
+                    content: (
+                        <DisplayPokemon
+                            {...data}
+                            onChoose={(pokemon) => {
+                                addPokemonToTeam(pokemon.id);
+                            }}
+                        />
+                    ),
                     wrapperProps: { className: 'rounded-[3rem]!' },
                 });
             }

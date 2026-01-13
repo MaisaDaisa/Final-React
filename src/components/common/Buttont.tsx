@@ -1,6 +1,7 @@
 import React, { type ButtonHTMLAttributes } from 'react';
+import { cn } from '../../helper';
 
-type ButtonVariant = 'primary' | 'secondary' | 'danger';
+type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'none';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: ButtonVariant;
@@ -22,11 +23,12 @@ const Button: React.FC<ButtonProps> = ({
         secondary:
             'bg-gray-200 text-gray-900 hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600',
         danger: 'bg-red-400 text-white hover:bg-red-500 dark:bg-red-500 dark:hover:bg-red-600',
+        none: '',
     };
 
     return (
         <button
-            className={`${baseClasses} ${variantClasses[variant]} ${className}`}
+            className={cn(baseClasses, variantClasses[variant], className)}
             {...props}
         >
             {children}
