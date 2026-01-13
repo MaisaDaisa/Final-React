@@ -1,4 +1,5 @@
 import { MonitorCog, Moon, Sun } from 'lucide-react';
+import { Link } from 'react-router';
 import { useTheme } from '../../context';
 
 const Header = () => {
@@ -16,12 +17,12 @@ const Header = () => {
                 </div>
 
                 <nav className="hidden gap-6 font-semibold text-blue-900 md:flex dark:text-gray-200">
-                    <a className="transition hover:text-red-600" href="#">
+                    <Link to="/" className="transition hover:text-red-600">
                         Home
-                    </a>
-                    <a className="transition hover:text-red-600" href="#">
+                    </Link>
+                    <Link to="/teams" className="transition hover:text-red-600">
                         Pokémon
-                    </a>
+                    </Link>
                     <a className="transition hover:text-red-600" href="#">
                         Types
                     </a>

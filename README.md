@@ -1,11 +1,11 @@
 ## TODO:
 
-[] API integration
-[] React Hooks
-[] React Router
+[X] API integration
+[X] React Hooks
+[X] React Router
 [] Local Storage interaction
 [] Responsive on all devices
-[] Usage of animations
+[X] Usage of animations
 [] Usage of modals
 [] Dark mode
 [] Multi Language (Maybe)
