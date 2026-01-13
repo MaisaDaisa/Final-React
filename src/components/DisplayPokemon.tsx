@@ -123,7 +123,7 @@ export const DisplayPokemon: React.FC<Props> = (data) => {
                         <h3 className="mb-2 text-sm font-black tracking-widest text-gray-500 uppercase dark:text-gray-400">
                             Moves
                         </h3>
-                        <div className="scrollbar-hide max-h-32 overflow-y-auto pr-2 outline-0">
+                        <div className="no-scrollbar max-h-32 overflow-y-auto pr-2 outline-0">
                             <div className="flex flex-wrap gap-1">
                                 {data.moves.slice(0, 12).map((m) => (
                                     <span
