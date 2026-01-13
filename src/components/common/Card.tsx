@@ -8,7 +8,7 @@ import { DisplayPokemon } from '../DisplayPokemon';
 type Props = Pokemon;
 
 const Card: React.FC<Props> = ({ id, name, sprites, types }) => {
-    const { addPokemonToTeam, isTeamFull } = useTeams();
+    const { addPokemonToTeam, isTeamFull, activeTeam } = useTeams();
     const { addToast } = useToast();
     const { closeDialog } = useDialog();
 
@@ -33,17 +33,24 @@ const Card: React.FC<Props> = ({ id, name, sprites, types }) => {
                                 <Button
                                     variant="none"
                                     onClick={() => {
-                                        if (!isTeamFull()) {
-                                            addPokemonToTeam(data.id);
-                                            addToast({
-                                                type: 'success',
-                                                message: `${name} added to your team`,
-                                            });
-                                        } else {
+                                        if (!activeTeam) {
                                             addToast({
                                                 type: 'error',
-                                                message: `Your team is full, please remove pokemons before proceeding`,
+                                                message: `You do not have a team selected, please select a team first`,
                                             });
+                                        } else {
+                                            if (!isTeamFull()) {
+                                                addPokemonToTeam(data.id);
+                                                addToast({
+                                                    type: 'success',
+                                                    message: `${name} added to your team`,
+                                                });
+                                            } else {
+                                                addToast({
+                                                    type: 'error',
+                                                    message: `Your team is full, please remove pokemons before proceeding`,
+                                                });
+                                            }
                                         }
                                         closeDialog();
                                     }}
