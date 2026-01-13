@@ -23,7 +23,7 @@ export const ToastProvider: React.FC<PropsWithChildren> = ({ children }) => {
             {children}
             <div className="fixed right-4 bottom-4 z-50 flex flex-col gap-2">
                 {toasts.map((t) => (
-                    <ToastCom {...t} />
+                    <ToastCom {...t} onClose={() => removeToast(t.id)} />
                 ))}
             </div>
         </ToastContext.Provider>
