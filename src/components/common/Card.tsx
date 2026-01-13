@@ -1,6 +1,6 @@
 import { DisplayPokemon } from '@/components';
 import { api } from '@/config';
-import { useDialog, useTeams } from '@/context';
+import { useDialog, useTeams, useToast } from '@/context';
 import { getTypeColor } from '@/helper';
 import type { Pokemon } from 'pokenode-ts';
 
@@ -8,6 +8,9 @@ type Props = Pokemon;
 
 const Card: React.FC<Props> = ({ id, name, sprites, types }) => {
     const { addPokemonToTeam } = useTeams();
+    const { addToast } = useToast();
+    const { closeDialog } = useDialog();
+
     const imageUrl =
         sprites?.other?.['official-artwork']?.front_default ??
         sprites?.other?.dream_world?.front_default ??
@@ -27,6 +30,11 @@ const Card: React.FC<Props> = ({ id, name, sprites, types }) => {
                             {...data}
                             onChoose={(pokemon) => {
                                 addPokemonToTeam(pokemon.id);
+                                addToast({
+                                    type: 'success',
+                                    message: `${name} added to your team`,
+                                });
+                                closeDialog();
                             }}
                         />
                     ),

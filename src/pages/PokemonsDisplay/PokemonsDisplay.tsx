@@ -14,7 +14,7 @@ const PokemonsDisplay: React.FC = () => {
     }
 
     return (
-        <div className="flex flex-col items-center p-4">
+        <div className="flex flex-col items-center px-2 py-1 md:p-4">
             <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {pokemons.length > 0 ? (
                     pokemons.map((poke) => (

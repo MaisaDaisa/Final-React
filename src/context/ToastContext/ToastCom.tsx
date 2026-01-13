@@ -4,7 +4,7 @@ const ToastCom: React.FC<Toast> = (toast) => {
     return (
         <div
             key={toast.id}
-            className={`rounded px-4 py-2 text-white shadow-lg ${
+            className={`z-100 rounded px-4 py-2 text-white shadow-lg ${
                 toast.type === 'success'
                     ? 'bg-green-500'
                     : toast.type === 'error'

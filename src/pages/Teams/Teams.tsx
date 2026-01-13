@@ -23,8 +23,8 @@ const Teams: React.FC = () => {
     };
 
     return (
-        <div className="mx-auto max-w-5xl p-6">
-            <header className="mb-10 flex items-end justify-between">
+        <div className="mx-auto max-w-5xl p-6 max-md:px-2">
+            <div className="mb-10 flex items-end justify-between">
                 <div>
                     <h1 className="text-4xl font-black tracking-tighter uppercase dark:text-white">
                         Your Teams
@@ -41,7 +41,7 @@ const Teams: React.FC = () => {
                 >
                     <Plus />
                 </button>
-            </header>
+            </div>
 
             <div className="flex flex-col gap-8">
                 {teamNames.length > 0 ? (
