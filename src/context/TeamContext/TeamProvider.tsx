@@ -7,10 +7,15 @@ export const TeamProvider: React.FC<{ children: ReactNode }> = ({
     children,
 }) => {
     const [teams, setTeams] = useLocalStorage<TeamMap>('pokemon-teams', {});
+    const [activeTeam, setActiveTeam] = useLocalStorage<string | null>(
+        'active-pokemon-team',
+        null,
+    );
 
     const createTeam = (name: string) => {
         if (!name.trim() || teams[name]) return;
         setTeams((prev) => ({ ...prev, [name]: [] }));
+        if (!activeTeam) setActiveTeam(name);
     };
 
     const deleteTeam = (name: string) => {
@@ -19,37 +24,49 @@ export const TeamProvider: React.FC<{ children: ReactNode }> = ({
             delete next[name];
             return next;
         });
+        if (activeTeam === name) setActiveTeam(null);
     };
 
-    const addPokemonToTeam = (teamName: string, pokemonId: number) => {
-        setTeams((prev) => {
-            const currentTeam = prev[teamName] || [];
+    const addPokemonToTeam = (pokemonId: number, teamName?: string) => {
+        const targetTeam = teamName ?? activeTeam;
+        if (!targetTeam || !teams[targetTeam]) return;
 
-            if (currentTeam.length >= 6) return prev;
-            if (currentTeam.includes(pokemonId)) return prev;
+        setTeams((prev) => {
+            const currentTeam = prev[targetTeam] || [];
+            if (currentTeam.length >= 6 || currentTeam.includes(pokemonId))
+                return prev;
 
             return {
                 ...prev,
-                [teamName]: [...currentTeam, pokemonId],
+                [targetTeam]: [...currentTeam, pokemonId],
             };
         });
     };
 
-    const removePokemonFromTeam = (teamName: string, pokemonId: number) => {
+    const removePokemonFromTeam = (pokemonId: number, teamName?: string) => {
+        const targetTeam = teamName ?? activeTeam;
+        if (!targetTeam) return;
+
         setTeams((prev) => ({
             ...prev,
-            [teamName]: (prev[teamName] || []).filter((id) => id !== pokemonId),
+            [targetTeam]: (prev[targetTeam] || []).filter(
+                (id) => id !== pokemonId,
+            ),
         }));
     };
 
-    const isTeamFull = (teamName: string) => {
-        return (teams[teamName]?.length ?? 0) >= 6;
+    const isTeamFull = (teamName?: string) => {
+        const targetTeam = teamName ?? activeTeam;
+        if (!targetTeam) return false;
+        return (teams[targetTeam]?.length ?? 0) >= 6;
     };
 
     return (
         <TeamContext.Provider
             value={{
                 teams,
+                activeTeam,
+                setActiveTeam,
                 createTeam,
                 deleteTeam,
                 addPokemonToTeam,
