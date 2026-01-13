@@ -1,7 +1,7 @@
+import { routes } from '@/config';
+import { useTheme } from '@/context';
 import { MonitorCog, Moon, Sun } from 'lucide-react';
 import { Link } from 'react-router';
-import { routes } from '../../config';
-import { useTheme } from '../../context';
 
 const Header = () => {
     const { theme, toggleTheme } = useTheme();

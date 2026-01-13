@@ -1,13 +1,22 @@
+import { useDialog } from '@/context';
+import { getTypeColor } from '@/helper';
 import type { Pokemon } from 'pokenode-ts';
-import { getTypeColor } from '../../helper';
 
 type Props = Pokemon;
 
 const Card: React.FC<Props> = ({ id, name, sprites, types }) => {
     const imageUrl = sprites?.front_default ?? '';
+    const { openDialog } = useDialog();
+
+    const handleClick = () => {
+        openDialog('Hello', <div>Hello</div>);
+    };
 
     return (
-        <div className="mt-15 flex transform cursor-pointer flex-col items-center rounded-2xl border-4 border-yellow-400 bg-white p-4 text-center shadow-lg transition-transform hover:scale-105 dark:bg-gray-800">
+        <div
+            onClick={handleClick}
+            className="mt-15 flex transform cursor-pointer flex-col items-center rounded-2xl border-4 border-yellow-400 bg-white p-4 text-center shadow-lg transition-transform hover:scale-105 dark:bg-gray-800"
+        >
             <div className="relative h-30 w-60">
                 <img
                     src={imageUrl}
