@@ -1,5 +1,6 @@
 import { MonitorCog, Moon, Sun } from 'lucide-react';
 import { Link } from 'react-router';
+import { routes } from '../../config';
 import { useTheme } from '../../context';
 
 const Header = () => {
@@ -17,18 +18,24 @@ const Header = () => {
                 </div>
 
                 <nav className="hidden gap-6 font-semibold text-blue-900 md:flex dark:text-gray-200">
-                    <Link to="/" className="transition hover:text-red-600">
+                    <Link
+                        to={routes.HOME.url}
+                        className="transition hover:text-red-600"
+                    >
                         Home
                     </Link>
-                    <Link to="/teams" className="transition hover:text-red-600">
-                        Pokémon
+                    <Link
+                        to={routes.BUILDER.url}
+                        className="transition hover:text-red-600"
+                    >
+                        Teams
                     </Link>
-                    <a className="transition hover:text-red-600" href="#">
-                        Types
-                    </a>
-                    <a className="transition hover:text-red-600" href="#">
-                        Battles
-                    </a>
+                    <Link
+                        to={routes.BUILDER.url}
+                        className="transition hover:text-red-600"
+                    >
+                        Builder
+                    </Link>
                 </nav>
 
                 <div className="flex justify-end">

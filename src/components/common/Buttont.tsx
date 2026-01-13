@@ -14,7 +14,7 @@ const Button: React.FC<ButtonProps> = ({
     ...props
 }) => {
     const baseClasses =
-        'px-6 py-3 rounded-lg font-bold shadow hover:shadow-lg transition-colors duration-200';
+        'px-6 py-3 rounded-lg font-bold shadow hover:shadow-lg transition-colors duration-200 cursor-pointer';
 
     const variantClasses = {
         primary:

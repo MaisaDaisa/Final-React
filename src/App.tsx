@@ -1,15 +1,21 @@
 import { Route, Routes } from 'react-router';
 import { Layout } from './components';
+import { routes } from './config';
 import { ToastProvider } from './context';
-import { Builder, Home } from './pages';
 
 function App() {
     return (
         <ToastProvider>
             <Layout>
                 <Routes>
-                    <Route index element={<Home />} path="/" />
-                    <Route index element={<Builder />} path="/builder" />
+                    <Route
+                        element={<routes.HOME.component />}
+                        path={routes.HOME.url}
+                    />
+                    <Route
+                        element={<routes.BUILDER.component />}
+                        path={routes.BUILDER.url}
+                    />
                 </Routes>
             </Layout>
         </ToastProvider>
