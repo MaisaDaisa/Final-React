@@ -4,8 +4,7 @@
 [X] React Hooks
 [X] React Router
 [X] Local Storage interaction
-[] Responsive on all devices
+[X] Responsive on all devices
 [X] Usage of animations
 [X] Usage of modals
 [X] Dark mode
-[] Multi Language (Maybe)

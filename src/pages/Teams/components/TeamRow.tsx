@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { routes } from '../../config';
-import PokeShow from './components/PokeShow';
-import TeamRowActions from './components/TeamRowActions';
-import useFetchTeamData from './useFetchTeamData';
+import { routes } from '../../../config';
+import useFetchTeamData from '../useFetchTeamData';
+import PokeShow from './PokeShow';
+import TeamRowActions from './TeamRowActions';
 
 type TeamRowProps = {
     name: string;

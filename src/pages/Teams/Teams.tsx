@@ -1,11 +1,12 @@
-import { useDialog, useTeams } from '@/context';
+import { useDialog, useTeams, useToast } from '@/context';
 import { Plus } from 'lucide-react';
 import CreateTeamForm from './CreateTeamForm';
-import TeamRow from './TeamRow';
+import TeamRow from './components/TeamRow';
 
 const Teams: React.FC = () => {
     const { teams, activeTeam, setActiveTeam, deleteTeam, createTeam } =
         useTeams();
+    const { addToast } = useToast();
     const { openDialog, closeDialog } = useDialog();
     const teamNames = Object.keys(teams);
 
@@ -30,7 +31,7 @@ const Teams: React.FC = () => {
                         Your Teams
                     </h1>
                     <p className="mt-2 text-gray-500">
-                        Manage your rosters and select your active squad.
+                        manage your teams here and their status
                     </p>
                 </div>
 
@@ -52,7 +53,13 @@ const Teams: React.FC = () => {
                             ids={teams[name]}
                             isActive={activeTeam === name}
                             onSelect={setActiveTeam}
-                            onDelete={deleteTeam}
+                            onDelete={(name) => {
+                                deleteTeam(name);
+                                addToast({
+                                    type: 'success',
+                                    message: `${name} team has been Deleted`,
+                                });
+                            }}
                         />
                     ))
                 ) : (
