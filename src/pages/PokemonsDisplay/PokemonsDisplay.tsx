@@ -1,4 +1,4 @@
-import { Card } from '@/components';
+import { Card, Loader } from '@/components';
 import React from 'react';
 import useFetchPokemon from './useFetchPokemon';
 
@@ -6,11 +6,7 @@ const PokemonsDisplay: React.FC = () => {
     const { pokemons, loading, fetchingMore, loadMore } = useFetchPokemon();
 
     if (loading) {
-        return (
-            <div className="flex h-64 items-center justify-center font-bold text-gray-500">
-                Loading Pokedex...
-            </div>
-        );
+        return <Loader>Loading pokemons...</Loader>;
     }
 
     return (
