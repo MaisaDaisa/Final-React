@@ -1,7 +1,7 @@
+import { Button } from '@/components';
+import { routes } from '@/config';
 import React from 'react';
 import { Link } from 'react-router';
-import { Button } from '../../components';
-import { routes } from '../../config/routes';
 import type { Props } from './types';
 
 const Home: React.FC<Props> = () => {
@@ -17,7 +17,7 @@ const Home: React.FC<Props> = () => {
                         through Pokemons and build the amazing teams for you to
                         save
                     </p>
-                    <Link to={routes.BUILDER.url}>
+                    <Link to={routes.POKEMONS.url}>
                         <Button className="mt-8">Start Exploring</Button>
                     </Link>
                 </div>

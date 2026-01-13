@@ -1,2 +1,2 @@
-export * from './Builder';
 export * from './Home';
+export * from './PokemonsDisplay';

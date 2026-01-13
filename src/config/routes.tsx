@@ -1,12 +1,14 @@
-import { Builder, Home } from '../pages';
+import { Home, PokemonsDisplay } from '../pages';
 
 export const routes = {
     HOME: {
         url: '/',
         component: Home,
+        title: 'Home',
     },
-    BUILDER: {
-        url: '/builder',
-        component: Builder,
+    POKEMONS: {
+        url: '/pokemons',
+        component: PokemonsDisplay,
+        title: 'Pokemon',
     },
 };

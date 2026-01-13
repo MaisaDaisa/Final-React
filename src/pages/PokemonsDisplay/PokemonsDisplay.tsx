@@ -2,7 +2,7 @@ import { Card } from '@/components';
 import React from 'react';
 import useFetchPokemon from './useFetchPokemon';
 
-const Builder: React.FC = () => {
+const PokemonsDisplay: React.FC = () => {
     const { pokemons, loading, fetchingMore, loadMore } = useFetchPokemon();
 
     if (loading) {
@@ -47,4 +47,4 @@ const Builder: React.FC = () => {
     );
 };
 
-export default Builder;
+export default PokemonsDisplay;

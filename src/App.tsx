@@ -15,8 +15,8 @@ function App() {
                                 path={routes.HOME.url}
                             />
                             <Route
-                                element={<routes.BUILDER.component />}
-                                path={routes.BUILDER.url}
+                                element={<routes.POKEMONS.component />}
+                                path={routes.POKEMONS.url}
                             />
                         </Routes>
                     </Layout>

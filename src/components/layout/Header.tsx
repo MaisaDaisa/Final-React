@@ -18,24 +18,16 @@ const Header = () => {
                 </div>
 
                 <nav className="hidden gap-6 font-semibold text-blue-900 md:flex dark:text-gray-200">
-                    <Link
-                        to={routes.HOME.url}
-                        className="transition hover:text-red-600"
-                    >
-                        Home
-                    </Link>
-                    <Link
-                        to={routes.BUILDER.url}
-                        className="transition hover:text-red-600"
-                    >
-                        Teams
-                    </Link>
-                    <Link
-                        to={routes.BUILDER.url}
-                        className="transition hover:text-red-600"
-                    >
-                        Builder
-                    </Link>
+                    {Object.values(routes).map((val) => {
+                        return (
+                            <Link
+                                to={val.url}
+                                className="transition hover:text-red-600"
+                            >
+                                {val.title}
+                            </Link>
+                        );
+                    })}
                 </nav>
 
                 <div className="flex justify-end">
