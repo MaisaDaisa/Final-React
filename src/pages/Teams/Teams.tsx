@@ -20,6 +20,9 @@ const Teams: React.FC = () => {
                     }}
                 />
             ),
+            wrapperProps: {
+                className: 'rounded-[2rem]',
+            },
         });
     };
 
