@@ -1,4 +1,4 @@
-import { Card, Loader } from '@/components';
+import { Button, Card, Loader } from '@/components';
 import React from 'react';
 import useFetchPokemon from './useFetchPokemon';
 
@@ -24,10 +24,10 @@ const PokemonsDisplay: React.FC = () => {
             </div>
 
             {pokemons.length > 0 && (
-                <button
+                <Button
                     onClick={loadMore}
                     disabled={fetchingMore}
-                    className="mt-12 flex items-center justify-center rounded-xl bg-blue-600 px-8 py-3 font-black tracking-widest text-white uppercase shadow-lg transition-all hover:bg-blue-700 hover:shadow-blue-500/20 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="mt-12 flex items-center justify-center rounded-xl px-8 py-3 font-black tracking-widest text-white uppercase shadow-lg transition-all disabled:cursor-not-allowed disabled:opacity-50"
                 >
                     {fetchingMore ? (
                         <span className="flex items-center gap-2">
@@ -37,7 +37,7 @@ const PokemonsDisplay: React.FC = () => {
                     ) : (
                         'Load More Pokemon'
                     )}
-                </button>
+                </Button>
             )}
         </div>
     );
