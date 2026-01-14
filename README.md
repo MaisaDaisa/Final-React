@@ -10,6 +10,10 @@ This is my work for the final project of React course of BTU, I have used the Po
 - **Icons**: Lucide React
 - **Data Source**: PokeAPI
 
+## Live Demo
+
+**[View the Live Project on Netlify](https://maisa-react-final.netlify.app/)**
+
 ## Progress Checklist
 
 - [x] **API Integration**
