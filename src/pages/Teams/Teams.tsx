@@ -40,7 +40,7 @@ const Teams: React.FC = () => {
 
                 <button
                     onClick={handleOpenCreateDialog}
-                    className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg shadow-blue-500/30 transition-transform hover:scale-110 active:scale-95 dark:bg-red-500 dark:shadow-red-500/30"
+                    className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-blue-600 text-white shadow-lg shadow-blue-500/30 transition-transform hover:scale-110 active:scale-95 dark:bg-red-500 dark:shadow-red-500/30"
                     aria-label="Create Team"
                 >
                     <Plus />
