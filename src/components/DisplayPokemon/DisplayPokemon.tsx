@@ -24,7 +24,7 @@ const DisplayPokemon: React.FC<Props> = ({ bottomSection, ...data }) => {
                 </div>
 
                 <div className="text-center">
-                    <span className="text-xs font-black tracking-widest text-gray-400">
+                    <span className="text-xs font-black text-gray-400">
                         #{data.id.toString().padStart(3, '0')}
                     </span>
                     <h2 className="text-4xl font-black tracking-tighter text-gray-900 capitalize dark:text-white">
@@ -65,7 +65,7 @@ const DisplayPokemon: React.FC<Props> = ({ bottomSection, ...data }) => {
 
             <div className="flex flex-1 flex-col gap-6">
                 <section>
-                    <h3 className="mb-4 text-sm font-black tracking-widest text-gray-500 uppercase dark:text-gray-400">
+                    <h3 className="mb-4 text-sm font-black text-gray-500 uppercase dark:text-gray-400">
                         Base Stats
                     </h3>
                     <div className="space-y-3">
@@ -100,7 +100,7 @@ const DisplayPokemon: React.FC<Props> = ({ bottomSection, ...data }) => {
 
                 <div className="grid grid-cols-2 gap-6">
                     <section>
-                        <h3 className="mb-2 text-sm font-black tracking-widest text-gray-500 uppercase dark:text-gray-400">
+                        <h3 className="mb-2 text-sm font-black text-gray-500 uppercase dark:text-gray-400">
                             Abilities
                         </h3>
                         <div className="flex flex-col gap-2">
@@ -116,7 +116,7 @@ const DisplayPokemon: React.FC<Props> = ({ bottomSection, ...data }) => {
                     </section>
 
                     <section>
-                        <h3 className="mb-2 text-sm font-black tracking-widest text-gray-500 uppercase dark:text-gray-400">
+                        <h3 className="mb-2 text-sm font-black text-gray-500 uppercase dark:text-gray-400">
                             Moves
                         </h3>
                         <div className="no-scrollbar max-h-32 overflow-y-auto pr-2 outline-0">

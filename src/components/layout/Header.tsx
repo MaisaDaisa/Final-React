@@ -40,7 +40,7 @@ const Header = () => {
                                 key={val.url}
                                 to={val.url}
                                 className={cn(
-                                    'group relative py-1 text-sm tracking-widest uppercase transition-all duration-200 hover:text-red-600',
+                                    'group relative py-1 text-sm uppercase transition-all duration-200 hover:text-red-600',
                                     isActive
                                         ? 'text-red-600'
                                         : 'text-slate-600 dark:text-gray-400',

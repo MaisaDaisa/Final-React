@@ -27,7 +27,7 @@ const PokemonsDisplay: React.FC = () => {
                 <Button
                     onClick={loadMore}
                     disabled={fetchingMore}
-                    className="mt-12 flex items-center justify-center rounded-xl px-8 py-3 font-black tracking-widest text-white uppercase shadow-lg transition-all disabled:cursor-not-allowed disabled:opacity-50"
+                    className="mt-12 rounded-xl uppercase shadow-lg disabled:cursor-not-allowed disabled:opacity-50"
                 >
                     {fetchingMore ? (
                         <span className="flex items-center gap-2">

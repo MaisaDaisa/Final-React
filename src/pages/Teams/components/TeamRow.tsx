@@ -41,7 +41,7 @@ const TeamRow: React.FC<TeamRowProps> = ({
                                 <div
                                     className={`h-1.5 w-1.5 rounded-full ${isActive ? 'animate-pulse bg-blue-500' : 'bg-gray-300'}`}
                                 />
-                                <span className="text-[10px] font-bold tracking-widest text-gray-400 uppercase">
+                                <span className="text-[10px] font-bold text-gray-400 uppercase">
                                     {isActive ? 'Active Squad' : 'Reserve Team'}
                                 </span>
                             </div>
