@@ -6,7 +6,7 @@ import type { Props } from './types';
 
 const Home: React.FC<Props> = () => {
     return (
-        <div className="font-poppins relative h-full w-full overflow-hidden dark:bg-gray-950">
+        <div className="font-poppins relative h-full w-full overflow-hidden">
             <StarBackground />
             <section className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
                 <div className="flex -translate-y-8 flex-col items-center">
