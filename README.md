@@ -16,9 +16,9 @@ This is my work for the final project of React course of BTU, I have used the Po
 
 ## Project UI
 
-[Home Page](/readme/home.png)
-[Pokemon Page](/readme/poke.png)
-[Team Page](/readme/team.png)
+![Home Page](/readme/home.png)
+![Pokemon Page](/readme/poke.png)
+![Team Page](/readme/team.png)
 
 ## Progress Checklist
 
